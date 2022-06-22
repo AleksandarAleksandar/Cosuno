@@ -1,13 +1,11 @@
 const asyncHandler = require('express-async-handler');
 
 const Company = require('../models/companyModal');
-const User = require('../models/userModel');
 const getCompany = asyncHandler(async (req, res) => {
     const companies = await Company.find();
     res.status(200).json({ message: 'Get companies', companies });
 });
 const postCompany = asyncHandler(async (req, res) => {
-    console.log(req.body);
     const { name, city, speciality } = req.body;
     if (!name || !city || !speciality) {
         res.status(400);
@@ -46,10 +44,7 @@ const postCompany = asyncHandler(async (req, res) => {
     res.status(200).json(company);
 });
 const putCompany = asyncHandler(async (req, res) => {
-    // if (!req.params.id) {
-    //     res.status(400);
-    //     throw new Error('Please add company id');
-    // }
+
     if (!req.body.name) {
         res.status(400);
         throw new Error('Please add company name');
